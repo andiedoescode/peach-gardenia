@@ -111,32 +111,13 @@ pnpm test --watch
 
 ```
 .
-├── README.md                           # Project documentation
-├── Server/                             # Backend (Express)
-│  ├── app.js
-│  ├── package.json
-│  └── package-lock.json
-└── client/                             # Frontend (React + Vite + Jest)
-   ├── public/                          # Static public assets
-   │  └── vite.svg
-   ├── src/
-   │  ├── __mocks__/                    # Jest file mocks
-   │  │  └── fileMock.js
-   │  ├── assets/                       # Bundled assets
-   │  │  └── react.svg
-   │  ├── tests/                        # Jest tests
-   │  │  └── App.test.jsx
-   │  ├── App.css
-   │  ├── App.jsx                       # Main component
-   │  ├── index.css
-   │  └── main.jsx                      # App entry
-   ├── README.md
-   ├── index.html
-   ├── babel.config.cjs                 # Babel config for Jest transforms
-   ├── eslint.config.js
-   ├── jest.config.cjs                  # Jest config (jsdom, asset/CSS mapping)
-   ├── package.json
-   ├── pnpm-lock.yaml
-   ├── pnpm-workspace.yaml
-   └── vite.config.js
+├── README.md                # Project overview and setup instructions
+├── server/                  # Backend service (Express)
+└── client/                  # Frontend app (React + Vite) with tests (Jest)
+   ├── public/               # Static files served as-is
+   └── src/                  # Application source code
+      ├── assets/            # Bundled assets (icons, images, etc.)
+      ├── __mocks__/         # Jest mocks
+      ├── tests/             # Test suite
+      └── ...                # Components, styles, entry points, utilities
 ```
