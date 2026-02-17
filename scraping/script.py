@@ -3,8 +3,26 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+import time
 
 from bs4 import BeautifulSoup
+
+# Handling for long wishlists >10 items
+def handle_lazy_load(driver, max_scrolls=10):
+    scrolls = 0
+    last_height = driver.execute_script("return document.body.scrollHeight")
+
+    while scrolls < max_scrolls:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+        time.sleep(1.5)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+
+        if new_height == last_height:
+            break
+
+        last_height = new_height
+        scrolls += 1
 
 def get_wishlist_items(
     url: str,
@@ -28,6 +46,8 @@ def get_wishlist_items(
         )
     except:
         pass
+
+    handle_lazy_load(driver, max_scrolls=5)
 
     html = driver.page_source
     driver.quit()
@@ -137,4 +157,5 @@ live_url = "https://www.amazon.com/hz/wishlist/ls/2RKHN4PDYS5H4"
 get_wishlist_items(live_url)
 
 # with open('wishlist_items.html', 'w') as file:
+# with open('wishlist_items.html', 'w', encoding='utf-8') as file:
 #     print(wishlist_items, file=file)
